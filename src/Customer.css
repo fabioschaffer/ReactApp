@@ -1,0 +1,46 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    align-content: stretch;
+    border: 0px solid red;
+}
+    #container #divToolbar {
+        height: 60px;
+        box-shadow:inset 0px 0px 0px 0px blue;
+        border-top: 0px solid lightgrey;
+        border-bottom: 0px solid lightgrey;
+        text-align: left;
+        background-color: #b1b1b1;
+    }
+    #container #divToolbar .divAction {
+        height: 100%;
+        width: 60px;
+        box-shadow:inset 0px 0px 0px 0px gold;
+        justify-content: center;
+        align-items: center;
+        display: inline-flex;
+    }
+    #container #divToolbar :hover {
+        background-color: lightgrey;
+    }
+    #container #divFilter {
+        box-shadow:inset 0px 0px 0px 2px lightgray;
+        display: block;
+        padding-top: 15px;
+        padding-left: 10%;
+        padding-right: 10%;
+        }
+    #container #divContent {
+        flex-grow: 1;
+        width: 100%;
+        box-shadow:inset 0px 0px 0px 0px green;
+        background-color: white ;
+        display: flex;
+        justify-content: center;
+        padding-top: 15px;
+        padding-left: 10%;
+        padding-right: 10%;
+
+    }
