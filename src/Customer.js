@@ -17,8 +17,9 @@ export default function Customer() {
     useEffect(() => {
         globalContext.changeTitle('Cliente');
     });
-    const [showFilter, setShowFilter] = useState(false);
     const [showList, setShowList] = useState(true);
+    const [showForm, setShowForm] = useState(false);
+    const [showFilter, setShowFilter] = useState(false);
     const [custId, setCustId] = useState(0);
 
     const ShowFilterHandler = () => {
@@ -29,16 +30,28 @@ export default function Customer() {
     const ListHandler = () => {
         setCustId(0);
         setShowList(true);
+        setShowForm(false);
+        setShowFilter(false);
     }
 
     const NewHandler = () => {
         setCustId(0);
         setShowList(false);
+        setShowForm(true);
+        setShowFilter(false);
     }
 
     const EditHandler = (id) => {
         setCustId(id);
         setShowList(false);
+        setShowForm(true);
+        setShowFilter(false);
+    }
+
+    const FilterHandler = () => {
+        setShowList(false);
+        setShowForm(false);
+        setShowFilter(true);
     }
 
     return (
@@ -56,20 +69,17 @@ export default function Customer() {
                     //ao passar o mouse sobre o Pesquisar, exibir os fitros, utilizando 
                     //https://react-bootstrap.github.io/components/overlays/#popover-examples
                 }
-                <div className="divAction" title="Pesquisar" onClick={ShowFilterHandler}>
+                <div className="divAction" title="Pesquisar" onClick={FilterHandler}>
                     {
                         //Talvez modificar a imagem para ícone de filtro, e modificar tooltip para 'Filtrar'.
                     }
                     <img src="https://cdn0.iconfinder.com/data/icons/essentials-9/128/__Search-32.png" />
                 </div>
             </div>
-            {showFilter && <div id="divFilter">
-                <CustomerFilter></CustomerFilter>
-            </div>
-            }
             <div id="divContent">
                 {showList && <TableCustomer onChange={EditHandler} />}
-                {!showList && <FormCustomer custId={custId} />}
+                {showForm && <FormCustomer custId={custId} />}
+                {showFilter && <CustomerFilter></CustomerFilter>}
             </div>
         </div>
     )
@@ -105,7 +115,6 @@ function TableCustomer(props) {
             row.remove();
         }
     }
-
 
     const TableRows = list.map(i => {
         return <tr key={i.id} key2={i.id}>
@@ -272,8 +281,6 @@ function CustomerFilter() {
                     </Col>
                 </Form.Group>
             </Form>
-
-
         </div>
     )
 }
