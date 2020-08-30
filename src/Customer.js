@@ -80,7 +80,9 @@ function TableCustomer(props) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:62332/values').then(resp => {
+        axios.get('http://localhost:62332/values',
+                    { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
+        ).then(resp => {
             const items = [];
             resp.data.map((i, idx) => {
                 items.push({
@@ -96,9 +98,9 @@ function TableCustomer(props) {
     const DeleteHandler = (id) => {
         let r = window.confirm("Confirma exclusão?" + id);
         if (r == true) {
-            //modificar o ícone para loading.
-            //exlcuir no server.
-            axios.delete('http://localhost:62332/values/' + id);
+            axios.delete('http://localhost:62332/values/' + id,
+                        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
+            );
             let row = $("#tableCust tbody tr[key2='" + id + "']");
             row.remove();
         }
@@ -138,18 +140,22 @@ function FormCustomer(props) {
     const [name, setName] = useState('');
 
     const SaveHandler = () => {
-        //alert(name);
         if (props.custId == 0) {
-            const response = axios.post('http://localhost:62332/values', { Name: name });
+            const response = axios.post('http://localhost:62332/values', 
+                                        { Name: name }, 
+                                        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } });
         } else {
-            const response = axios.put('http://localhost:62332/values/' + props.custId, { name: name });
+            const response = axios.put('http://localhost:62332/values/' + props.custId,
+                                        { name: name }, 
+                                        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } });
         }
-
     }
 
     useEffect(() => {
         if (props.custId != 0) {
-            axios.get('http://localhost:62332/values/' + props.custId).then(resp => {
+            axios.get('http://localhost:62332/values/' + props.custId,
+            { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
+            ).then(resp => {
                 setName(resp.data.name);
             });
         }
