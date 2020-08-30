@@ -14,11 +14,10 @@ import { useHistory } from "react-router-dom";
 function App() {
     const globalContext = useContext(GlobalContext);
     const history = useHistory();
-
     const LogoutHandler = () => {
+        localStorage.removeItem('ReactAppToken');
         globalContext.changeLogedIn(false);
     }
-
     return (
         <Router>
             <div className="main-container">

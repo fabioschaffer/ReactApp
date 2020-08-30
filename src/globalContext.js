@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export const GlobalContext = React.createContext({
     logedIn: false,
@@ -8,7 +8,7 @@ export const GlobalContext = React.createContext({
 });
 
 const GlobalContextProvider = props => {
-    const [localLogedIn, setlocalLogedIn] = useState(false);
+    const [localLogedIn, setlocalLogedIn] = useState(localStorage.getItem('ReactAppToken') != null);
     const [localTitle, setLocalTitle] = useState('');
     const changeTitleHandler = (newT) => {
         setLocalTitle(newT);
