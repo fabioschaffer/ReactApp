@@ -21,11 +21,8 @@ export default function Customer() {
     const [showForm, setShowForm] = useState(false);
     const [showFilter, setShowFilter] = useState(false);
     const [custId, setCustId] = useState(0);
-
-    const ShowFilterHandler = () => {
-        if (showFilter) $("#divFilter").hide(); else $("#divFilter").show();
-        setShowFilter(!showFilter);
-    }
+    const [nameFilter, setNameFilter] = useState('');
+    const [cityFilter, setCityFilter] = useState('');
 
     const ListHandler = () => {
         setCustId(0);
@@ -54,6 +51,12 @@ export default function Customer() {
         setShowFilter(true);
     }
 
+    const FilterChangedHandler = (name, city) => {
+        setNameFilter(name);
+        setCityFilter(city);
+        ListHandler();
+    }
+
     return (
         <div id="container">
             <div id="divToolbar">
@@ -77,9 +80,9 @@ export default function Customer() {
                 </div>
             </div>
             <div id="divContent">
-                {showList && <TableCustomer onChange={EditHandler} />}
+                {showList && <TableCustomer onChange={EditHandler} NameFilter={nameFilter} CityFilter={cityFilter} />}
                 {showForm && <FormCustomer custId={custId} />}
-                {showFilter && <CustomerFilter></CustomerFilter>}
+                {showFilter && <CustomerFilter FilterChanged={FilterChangedHandler} ></CustomerFilter>}
             </div>
         </div>
     )
@@ -91,7 +94,13 @@ function TableCustomer(props) {
 
     useEffect(() => {
         axios.get('http://localhost:62332/values',
-                    { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
+            {
+                params: {
+                    name: props.NameFilter,
+                    city: props.CityFilter
+                }
+            },
+            { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
         ).then(resp => {
             const items = [];
             resp.data.map((i, idx) => {
@@ -109,7 +118,7 @@ function TableCustomer(props) {
         let r = window.confirm("Confirma exclusão?" + id);
         if (r == true) {
             axios.delete('http://localhost:62332/values/' + id,
-                        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
+                { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
             );
             let row = $("#tableCust tbody tr[key2='" + id + "']");
             row.remove();
@@ -150,25 +159,25 @@ function FormCustomer(props) {
 
     const SaveHandler = () => {
         if (props.custId == 0) {
-            const response = axios.post('http://localhost:62332/values', 
-                                        { Name: name }, 
-                                        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } });
+            const response = axios.post('http://localhost:62332/values',
+                { Name: name },
+                { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } });
         } else {
             const response = axios.put('http://localhost:62332/values/' + props.custId,
-                                        { name: name }, 
-                                        { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } });
+                { name: name },
+                { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } });
         }
     }
 
     useEffect(() => {
         if (props.custId != 0) {
             axios.get('http://localhost:62332/values/' + props.custId,
-            { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
+                { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
             ).then(resp => {
                 setName(resp.data.name);
             });
         }
-    },[]);
+    }, []);
 
     return (
         <div className="container-fluid">
@@ -176,7 +185,7 @@ function FormCustomer(props) {
                 <Form.Group as={Row} controlId="formHorizontalEmail" className="no-gutter">
                     <Form.Label column md={2}> Nome: </Form.Label>
                     <Col md={10}>
-                        <Form.Control type="text"   value={name} onChange={e => setName(e.target.value)} />
+                        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
                     </Col>
                 </Form.Group>
 
@@ -226,58 +235,31 @@ function FormCustomer(props) {
     )
 }
 
-function CustomerFilter() {
+function CustomerFilter(props) {
+    const [name, setName] = useState('');
+
+    const ExecuteFilter = () => {
+        props.FilterChanged(name);
+    }
+
     return (
         <div className="container-fluid">
             <Form>
                 <Form.Group as={Row} controlId="formHorizontalEmail" className="no-gutter">
-                    <Form.Label column md={2}>
-                        Nome:
-    </Form.Label>
+                    <Form.Label column md={2}> Nome: </Form.Label>
                     <Col md={10}>
-                        <Form.Control type="email" />
+                        <Form.Control type="text" value={name} onChange={e => setName(e.target.value)} />
                     </Col>
                 </Form.Group>
-
                 <Form.Group as={Row} controlId="formHorizontalPassword" className="no-gutter">
-                    <Form.Label column md={2}>
-                        CPF:
-    </Form.Label>
+                    <Form.Label column md={2}> Cidade: </Form.Label>
                     <Col md={10}>
                         <Form.Control />
                     </Col>
                 </Form.Group>
-
-                <Form.Group as={Row} controlId="formHorizontalPassword" className="no-gutter">
-                    <Form.Label column md={2}>
-                        Telefone:
-    </Form.Label>
-                    <Col md={10}>
-                        <Form.Control />
-                    </Col>
-                </Form.Group>
-
-                <Form.Group as={Row} controlId="formHorizontalPassword" className="no-gutter">
-                    <Form.Label column md={2}>
-                        Endereço:
-    </Form.Label>
-                    <Col md={10}>
-                        <Form.Control />
-                    </Col>
-                </Form.Group>
-
-                <Form.Group as={Row} controlId="formHorizontalPassword" className="no-gutter">
-                    <Form.Label column md={2}>
-                        Cidade:
-    </Form.Label>
-                    <Col md={10}>
-                        <Form.Control />
-                    </Col>
-                </Form.Group>
-
                 <Form.Group as={Row} className="no-gutter">
                     <Col md={{ span: 10, offset: 2 }}>
-                        <Button type="submit">Filtrar</Button>
+                        <Button onClick={ExecuteFilter}>Filtrar</Button>
                     </Col>
                 </Form.Group>
             </Form>
