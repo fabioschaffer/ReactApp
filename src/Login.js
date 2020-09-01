@@ -29,26 +29,35 @@ export default function Login(props) {
 
     return (
         <div id="divLogin">
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <i className="material-icons" style={{ fontSize: '60px' }}>login</i>
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                    <h2>Entrar</h2>
-                </Form.Group>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Control type="texxt" placeholder="Login" value={login} onChange={e => setLogin(e.target.value)} />
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Control type="password" placeholder="Senha" value={pwd} onChange={e => setPwd(e.target.value)} />
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Button variant="primary" className="w-25" onClick={() => LoginHandler()}>Entrar</Button>
-                </Form.Group>
-            </Form>
+            <div id="divLogin2">
+                <div className="container-fluid">
+                    <div id="divLogin3">
+                        <Form.Group controlId="formBasicEmail">
+                            <i className="material-icons" style={{ fontSize: '60px' }}>login</i>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicEmail">
+                            <h2>Entrar</h2>
+                        </Form.Group>
+                    </div>
+                    <Form>
+                        <Form.Group as={Row} controlId="formHorizontalEmail" >
+                            <Form.Label column md={2}> Login: </Form.Label>
+                            <Col md={10}>
+                                <Form.Control type="text" value={login} onChange={e => setLogin(e.target.value)} />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formHorizontalPassword" >
+                            <Form.Label column md={2}>Senha:</Form.Label>
+                            <Col md={10}>
+                                <Form.Control type="password" value={pwd} onChange={e => setPwd(e.target.value)} />
+                            </Col>
+                        </Form.Group>
+                    </Form>
+                    <div id="divLogin4">
+                        <Button onClick={() => LoginHandler()}>Salvar</Button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-
-
     )
 }
