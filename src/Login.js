@@ -54,7 +54,7 @@ export default function Login(props) {
                         </Form.Group>
                     </Form>
                     <div id="divLogin4">
-                        <Button onClick={() => LoginHandler()}>Salvar</Button>
+                        <Button onClick={() => LoginHandler()}>Entrar</Button>
                     </div>
                 </div>
             </div>

@@ -93,13 +93,7 @@ function TableCustomer(props) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://localhost:62332/values',
-            {
-                params: {
-                    name: props.NameFilter,
-                    city: props.CityFilter
-                }
-            },
+        axios.get('http://localhost:62332/values?name=' + props.NameFilter + '&city=' + props.CityFilter,
             { headers: { 'Authorization': 'Bearer ' + localStorage.getItem('ReactAppToken') } }
         ).then(resp => {
             const items = [];
@@ -237,9 +231,10 @@ function FormCustomer(props) {
 
 function CustomerFilter(props) {
     const [name, setName] = useState('');
+    const [city, setCity] = useState('');
 
     const ExecuteFilter = () => {
-        props.FilterChanged(name);
+        props.FilterChanged(name, city);
     }
 
     return (
@@ -254,7 +249,7 @@ function CustomerFilter(props) {
                 <Form.Group as={Row} controlId="formHorizontalPassword" className="no-gutter">
                     <Form.Label column md={2}> Cidade: </Form.Label>
                     <Col md={10}>
-                        <Form.Control />
+                    <Form.Control type="text" value={city} onChange={e => setCity(e.target.value)} />
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="no-gutter">
