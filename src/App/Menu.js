@@ -8,7 +8,7 @@ function Menu() {
             <div className="menu-container">
                 <Link to="/">
                     <div className="divLogo">
-                        <img src="https://cdn0.iconfinder.com/data/icons/my-house-1/512/01-house-48.png" />
+                        <img src="https://cdn0.iconfinder.com/data/icons/my-house-1/512/01-house-48.png" alt="" />
                     </div>
                 </Link>
                 <div className="divMenu">

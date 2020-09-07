@@ -1,10 +1,10 @@
 import '../App/Login.css';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
-import { GlobalContext } from '../globalContext';
+import { GlobalContext } from '../GlobalContext';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -15,8 +15,8 @@ export default function Login(props) {
     const [pwd, setPwd] = useState('');
 
     const LoginHandler = () => {
-        const response = axios.post('http://localhost:62332/user/login', { Login: login }).then(resp => {
-            if (resp.status == 200) {
+        axios.post('http://localhost:62332/user/login', { Login: login }).then(resp => {
+            if (resp.status === 200) {
                 localStorage.setItem('ReactAppToken', resp.data.token);
                 globalContext.changeLogedIn(true);
                 history.push("/");

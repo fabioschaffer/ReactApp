@@ -1,13 +1,18 @@
 import '../App/Router.css';
-import React, { useContext } from 'react';
+import React, { useContext,useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { GlobalContext } from "../globalContext";
-import Customer from '../Customer';
-import Product from "../Product";
+import { GlobalContext } from "../GlobalContext";
 import Login from "./Login";
+import Customer from '../Customer/Customer';
+import Product from "../Product/Product";
 
 function Router() {
     const globalContext = useContext(GlobalContext);
+
+    useEffect(() => {
+        document.title = 'Vendas';
+      });
+
     return (
         <div id="divRouter">
             <Switch>

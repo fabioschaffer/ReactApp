@@ -1,6 +1,6 @@
+import '../Product/Product.css';
 import React, { useContext,useEffect   } from 'react';
-import {GlobalContext} from './globalContext';
-import './Product.css';
+import {GlobalContext} from '../GlobalContext';
 
 export default function Product() {
     
