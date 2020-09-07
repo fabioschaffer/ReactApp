@@ -1,0 +1,24 @@
+.divToolbar {
+    height: 60px;
+}
+.container-toolbar {
+    display: flex;
+    height: 100%;
+    flex-direction: row-reverse;
+}
+.container-toolbar > div {
+    text-align: center;
+    font-size: 30px;
+}
+.container-toolbar .divConfigs {
+    text-align: right;
+    width: 200px;
+    padding-right: 10px;
+}
+.container-toolbar .divTitle {
+    flex-grow: 1;
+    display: flex;
+    background-color: white;
+    justify-content: left;
+    padding-left: 10px;
+}

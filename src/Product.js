@@ -1,17 +1,17 @@
 import React, { useContext,useEffect   } from 'react';
 import {GlobalContext} from './globalContext';
-import './Home.css';
+import './Product.css';
 
-export default function Home() {
+export default function Product() {
     
     const globalContext = useContext(GlobalContext);
     useEffect(() => {
-        globalContext.changeTitle('Início');
+        globalContext.changeTitle('Produto');
       });
 
       return (
-        <div id ="divHome">
-            <img src="../graphic.jpg" />
+        <div id ="divProduct">
+            <p>Produto</p>
         </div>
     )
 }

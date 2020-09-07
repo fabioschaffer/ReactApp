@@ -1,0 +1,38 @@
+.divMenu {
+    width:200px;
+}
+.menu-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-content: stretch;
+    width: 100%;
+}
+    .menu-container > div {
+        width: 100%;
+        text-align: center;
+        line-height: 60px;
+    }
+    .menu-container .divLogo {
+      background-color: #303030;
+      color: #fff ;
+      text-align: center;
+      height: 60px;
+    }
+    .menu-container .divMenu {
+        flex-grow: 1;
+        background-color: #303030;
+    }
+    .menu-container .divMenu .line {
+        border-top: 1px solid #303030;
+    }
+    .menu-container .divMenu a {
+        text-decoration: none;
+        padding: 0px;
+        background-color: #444444;
+        color: #fff;
+        display: block;
+    }
+    .menu-container .divMenu a:hover {
+        background-color: #575757;
+    }

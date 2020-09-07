@@ -4,6 +4,8 @@
     background-color: #f5f5f5;
     align-items: center;
     justify-content: center;
+    align-content: stretch;
+    height: 100%;
 }
 #divLogin2 {
     max-width: 330px;

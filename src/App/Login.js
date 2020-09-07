@@ -1,11 +1,10 @@
+import '../App/Login.css';
 import React, { useState, useContext, useEffect } from 'react';
-import './Login.css';
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
-import { GlobalContext } from './globalContext';
+import { GlobalContext } from '../globalContext';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
