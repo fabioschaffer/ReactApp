@@ -1,6 +1,6 @@
 import '../App/App.css';
 import React, { useContext } from 'react';
-import { GlobalContext } from "../GlobalContext";
+import { GlobalContext } from "../Utility/GlobalContext";
 import { BrowserRouter  } from 'react-router-dom';
 import Menu from '../App/Menu';
 import Toolbar from '../App/Toolbar';

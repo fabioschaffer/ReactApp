@@ -1,7 +1,7 @@
 import '../App/Router.css';
 import React, { useContext,useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { GlobalContext } from "../GlobalContext";
+import { GlobalContext } from "../Utility/GlobalContext";
 import Login from "./Login";
 import Customer from '../Customer/Customer';
 import Product from "../Product/Product";

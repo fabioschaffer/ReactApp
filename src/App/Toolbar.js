@@ -1,7 +1,7 @@
 import '../App/Toolbar.css';
 import React, { useContext } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { GlobalContext } from "../GlobalContext";
+import { GlobalContext } from "../Utility/GlobalContext";
 
 function Toolbar() {
     const globalContext = useContext(GlobalContext);

@@ -1,6 +1,6 @@
 import '../Customer/Customer.css';
 import React, { useContext, useEffect, useState  } from 'react';
-import { GlobalContext } from '../GlobalContext';
+import { GlobalContext } from '../Utility/GlobalContext';
 import TableCustomer from "../Customer/TableCustomer";
 import FormCustomer from "../Customer/FormCustomer";
 import FilterCustomer from "../Customer/FilterCustomer";

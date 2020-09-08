@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
-import { GlobalContext } from '../GlobalContext';
+import { GlobalContext } from '../Utility/GlobalContext';
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
